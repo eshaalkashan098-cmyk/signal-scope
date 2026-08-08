@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signal Scope — Lookup Tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <header class="hero">
+    <div class="hero__sweep" aria-hidden="true">
+      <div class="sweep-ring r1"></div>
+      <div class="sweep-ring r2"></div>
+      <div class="sweep-ring r3"></div>
+      <div class="sweep-blip" id="sweepBlip"></div>
+    </div>
+    <p class="eyebrow">FIELD READOUT / PUBLIC RECORDS</p>
+    <h1>Signal Scope</h1>
+    <p class="hero__sub">Point it at an IP address or a username. It listens to what's already public and reads it back to you — nothing more.</p>
+  </header>
+
+  <main class="console">
+
+    <nav class="tabs" role="tablist">
+      <button class="tab is-active" data-tab="ip" role="tab" aria-selected="true">IP Address</button>
+      <button class="tab" data-tab="username" role="tab" aria-selected="false">Username</button>
+    </nav>
+
+    <section class="panel" id="panel-ip" data-panel="ip">
+      <form class="lookup-form" id="ipForm">
+        <label for="ipInput">IP address</label>
+        <div class="input-row">
+          <input type="text" id="ipInput" name="ip" placeholder="8.8.8.8" autocomplete="off" spellcheck="false" required>
+          <button type="submit" class="btn">Scan</button>
+        </div>
+      </form>
+      <div class="readout" id="ipReadout" aria-live="polite"></div>
+    </section>
+
+    <section class="panel is-hidden" id="panel-username" data-panel="username">
+      <form class="lookup-form" id="userForm">
+        <label for="userInput">Username</label>
+        <div class="input-row">
+          <input type="text" id="userInput" name="username" placeholder="octocat" autocomplete="off" spellcheck="false" required>
+          <button type="submit" class="btn">Scan</button>
+        </div>
+      </form>
+      <div class="readout" id="userReadout" aria-live="polite"></div>
+    </section>
+
+  </main>
+
+  <footer class="notice">
+    <p>This reads only public information — geolocation of an IP, and whether a public profile exists at a given username. Use it on yourself, or with someone's clear consent. Don't use it to track people without their knowledge.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
